@@ -26,3 +26,24 @@ const partTwo = () => {
 }
 
 partTwo();
+
+
+// More efficient - faster
+const firstRepeatFrequency = input => {
+  const hashMap = {0: true};
+  const stack = [0];
+  const answerQueue = [];
+  
+  while (!answerQueue.length) {
+    input.forEach(item => {
+      let currentTotal = stack.pop() + item;
+      stack.push(currentTotal);
+      if (hashMap[currentTotal]) {
+        answerQueue.push(currentTotal);
+      } else {
+        hashMap[currentTotal] = true;
+      }
+    })
+  }
+  return answerQueue[0];
+}

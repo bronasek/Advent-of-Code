@@ -31,8 +31,6 @@ const partOne = () => {
    
    result = twice * threeTimes;
    
-   console.log(twice);
-   console.log(threeTimes);
    console.log(result);
 }
 

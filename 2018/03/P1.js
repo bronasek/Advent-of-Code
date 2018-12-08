@@ -2,36 +2,30 @@
 
 const fs = require('fs');
 
-let claim = '#1 @ 257,829: 10x23';
-
 const partOne = () => {
    let inputValues = fs.readFileSync('./input.txt').toString().split("\n");
-   let fabric = {};
+   let fabric = new Array(1000).fill(null).map(() => new Array(1000).fill(0));
    let result = 0;
    
-   // for (let claim of inputValues) {
-      let newclaim = claim.replace(/\D/g, " ").replace(/\s+/g, " ").replace(/^(\s\d\s)/g, "").split(" ");
-      let left = newclaim[0];
-      let top = newclaim[1];
-      let width = newclaim[2];
-      let height = newclaim[3];
+   for (let claim of inputValues) {
+      let newclaim = claim.replace(/\D/g, " ").split(/\s+/g);
       
-      for (let i = newclaim[1]; i < newclaim[1] + newclaim[3]; i++) {
-         for (let j = newclaim[0]; j < newclaim[0] + newclaim[2]; j++) {
-            const w = fabric && fabric.i ? fabric.i.j : null;
-            // if (fabric.i.w) {
-               fabric[i][w] = true;
-            // } else {
-               // result++;
-            // }
+      let left = +newclaim[2];
+      let top = +newclaim[3];
+      let width = +newclaim[4];
+      let height = +newclaim[5];
+      
+      for (let i = top; i < (top + height); i++) {
+         for (let j = left; j < (left + width); j++) {
+            if (fabric[i][j] === 1) {
+               result++;
+            }
+               fabric[i][j]++;
          }
       }
-      
-      console.log(result);
-      
-      
-   // }
+   }
    
+   console.log(result);
 }
 
 partOne();
